@@ -1,0 +1,17 @@
+
+<%= @list.name %>
+<%= link_to 'mostrar todas las listas', lists_path %>
+<%= link_to 'add a bookmark', new_list_bookmark_path(@list) %>
+
+
+<% @list.movies.each do |movie|%>
+<div>
+    <% bookmark = Bookmark.find_by(list: @list, movie: movie)%>
+    <%= bookmark.comment%>
+    <%= movie.title%>
+    <%= link_to "Delete el listado",
+            bookmark_path(bookmark),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>  
+</div>
+<%end%>
